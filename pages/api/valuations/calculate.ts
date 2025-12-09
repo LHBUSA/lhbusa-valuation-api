@@ -9,7 +9,7 @@ export default async function handler(
   }
 
   try {
-    const { valuate } = require('valuation-engine')
+    const { valuate } = await import('valuation-engine')
     const result = valuate(req.body)
     res.status(200).json(result)
   } catch (error) {
