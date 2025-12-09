@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { valuate } from 'valuation-engine'
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
@@ -10,9 +9,11 @@ export default function handler(
   }
 
   try {
+    const { valuate } = require('valuation-engine')
     const result = valuate(req.body)
     res.status(200).json(result)
   } catch (error) {
+    console.error(error)
     res.status(500).json({ error: String(error) })
   }
 }
